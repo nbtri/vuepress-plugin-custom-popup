@@ -19,9 +19,9 @@ try {
 
 const submitToEndpoint = function connectToEndpoint(email, fields) {
     const emailEncoded = encodeURIComponent(email);
-    let url = endpoint.replace(/\/post/g, '/post-json');
+    let url = endpoint;//.replace(/\/post/g, '/post-json');
     const listFields = fields ? '&' + queryString.stringify(fields) : '';
-    const queryParams = `&EMAIL=${emailEncoded}${listFields}`;
+    const queryParams = `&to=${emailEncoded}${listFields}`;
     url = `${url}${queryParams}`;
 
     return new Promise((resolve, reject) =>
