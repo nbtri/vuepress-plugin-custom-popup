@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import VuepressCustomPopupLang from './utils'
+    import VuepressCustomPopupLang from '../utils'
     import submitToEndpoint from '../customPopup';
     import event from '../event';
     import _debug from 'debug';
