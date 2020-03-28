@@ -46,6 +46,8 @@
     import {faSpinner, faEnvelope, faShareSquare, faWindowClose} from '@fortawesome/free-solid-svg-icons';
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
+    library.add(faSpinner, faEnvelope, faShareSquare, faWindowClose)
+
     const debug = _debug('plugin-custom-popup');
     /**
      * If developers make UI customiztion and offer users an option whether to enable.
@@ -63,6 +65,9 @@
         debug('Fail to get options', error.message);
     }
     export default {
+        components: {
+            FontAwesomeIcon
+        },
         props: ['popupTitle', 'popupSubTitle', 'free', 'paid', 'count'],
         data() {
             return {
@@ -70,7 +75,7 @@
                     mail: '',
                     title: title || 'Newsletter',
                     content: content || 'Subscribe to get my lastest content. No spam.',
-                    submitText: submitText || 'Subscribe',
+                    submitText: submitText || 'Send Now',
                     sendingData: false,
                     errors: [],
                     formVisible: false,
@@ -120,28 +125,31 @@
                     return false;
                 }
 
-                let fields = ["free="+this.free,
-                    "full="+this.paid,
-                    "count="+this.count]
+                let fields = {"free":this.free,
+                    "full": this.paid,
+                    "count":this.count}
 
                 submitToEndpoint(this.slotProps.mail, fields)
                     .catch(err => {
-                        this.slotProps.mail = '';
+                        // this.slotProps.mail = '';
                         // if (popupEnabled) event.$emit('submited', {result: 'error'});
-                        this.slotProps.errors.push(err)
+                        // this.slotProps.errors.push(err)
+                        console.log(err)
                     })
                     .then(res => {
-                        if(res.status === 200) {
-                            this.slotProps.mail = '';
-                            // if (popupEnabled) event.$emit('submited', res);
-                            if (res.data.code === 200) {
-                                this.slotProps.formVisible = false
-                            } else {
-                                this.slotProps.errors.push(res.data.message)
-                            }
-                        }else{
-                            this.errors.push(this.language.LB_ERROR_SERVER)
-                        }
+                        // if(res.code === 200) {
+                        this.slotProps.mail = '';
+                        // if (popupEnabled) event.$emit('submited', res);
+                        this.slotProps.formVisible = false
+                        // if (res.data.code === 200) {
+                        //     this.slotProps.formVisible = false
+                        // } else {
+                        //     this.slotProps.errors.push(res.data.message)
+                        // }
+                        // }else{
+                        //     console.log(res.message)
+                        //     this.errors.push(this.language.LB_ERROR_SERVER)
+                        // }
                     }).finally(res => {
                     this.slotProps.sendingData = false;
                 });
@@ -178,7 +186,7 @@
             background #f8f8f8
 
         &__title
-            font-size 1.7rem
+            font-size 1.5rem
 
         &__content
             margin-top 1.5rem

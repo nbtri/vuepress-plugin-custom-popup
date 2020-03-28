@@ -41,5 +41,8 @@ module.exports = options => {
         },
 
         globalUIComponents: shouldInjectPopup ? popupComponent : undefined,
+        alias: {
+            '@cp-event': path.resolve(__dirname, 'event.js')
+        },
     };
 };
