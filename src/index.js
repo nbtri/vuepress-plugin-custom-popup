@@ -42,7 +42,8 @@ module.exports = options => {
 
         globalUIComponents: shouldInjectPopup ? popupComponent : undefined,
         alias: {
-            '@cp-event': path.resolve(__dirname, 'event.js')
+            '@cp-event': path.resolve(__dirname, 'event.js'),
+            '@CustomPopup': path.resolve(__dirname, 'components/CustomPopup.vue'),
         },
     };
 };

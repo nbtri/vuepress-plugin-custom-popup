@@ -8,7 +8,7 @@ function VuepressCustomPopupLang() {
         LB_YOUR_BUTTON_CANCAL: 'Cancel',
         LB_ERROR_NAME: 'Name required.',
         LB_ERROR_EMAIL: 'Email required.',
-        LB_ERROR_EMAIL_VALID: 'Valid email required.',
+        LB_ERROR_EMAIL_VALID: 'We only accept business email.',
         LB_ERROR_MESSAGE_BODY: 'Message required.',
         LB_ERROR_SERVER: 'System is busy, please try later.',
     };
