@@ -1,6 +1,7 @@
-import jsonp from 'jsonp';
+// import jsonp from 'jsonp';
 import queryString from 'query-string';
 import _debug from 'debug';
+import axios from 'axios'
 
 const debug = _debug('plugin-custom-popup');
 
@@ -37,18 +38,21 @@ const submitToEndpoint = function connectToEndpoint(email, fields, callback) {
     //     })
     // );
 
-    jsonp(url, { param: 'c', timeout: 3500 }, (err, data) => {
-        if (err) {
-            debug('Request failed', err);
-            // reject(err);
-        }
-        if (data) {
-            debug('Request success', data);
-            // resolve(data);
-        }
+    axios.get(url);
+    callback();
 
-        callback(data, err);
-    })
+    // jsonp(url, { param: 'c', timeout: 3500 }, (err, data) => {
+    //     if (err) {
+    //         debug('Request failed', err);
+    //         // reject(err);
+    //     }
+    //     if (data) {
+    //         debug('Request success', data);
+    //         // resolve(data);
+    //     }
+    //
+    //     callback(data, err);
+    // })
 
 };
 
