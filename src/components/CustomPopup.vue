@@ -148,31 +148,35 @@
                     "full": this.paid,
                     "count":this.count}
 
-                submitToEndpoint(this.slotProps.mail, fields)
-                    .catch(err => {
-                        // this.slotProps.mail = '';
-                        // if (popupEnabled) event.$emit('submited', {result: 'error'});
-                        // this.slotProps.errors.push(err)
-                        console.log(err)
-                    })
-                    .then(res => {
-                        // if(res.code === 200) {
-                        this.slotProps.mail = '';
-                        // if (popupEnabled) event.$emit('submited', res);
-                        // this.formVisible = false
-                        this.sentSuccess = true;
-                        // if (res.data.code === 200) {
-                        //     this.slotProps.formVisible = false
-                        // } else {
-                        //     this.slotProps.errors.push(res.data.message)
-                        // }
-                        // }else{
-                        //     console.log(res.message)
-                        //     this.errors.push(this.language.LB_ERROR_SERVER)
-                        // }
-                    }).finally(res => {
+                submitToEndpoint(this.slotProps.mail, fields, (data, err) => {
+                    this.slotProps.mail = '';
+                    this.sentSuccess = true;
                     this.slotProps.sendingData = false;
                 });
+                //     .catch(err => {
+                //         // this.slotProps.mail = '';
+                //         // if (popupEnabled) event.$emit('submited', {result: 'error'});
+                //         // this.slotProps.errors.push(err)
+                //         // console.log(err)
+                //     })
+                //     .then(res => {
+                //         // if(res.code === 200) {
+                //         this.slotProps.mail = '';
+                //         // if (popupEnabled) event.$emit('submited', res);
+                //         // this.formVisible = false
+                //         this.sentSuccess = true;
+                //         // if (res.data.code === 200) {
+                //         //     this.slotProps.formVisible = false
+                //         // } else {
+                //         //     this.slotProps.errors.push(res.data.message)
+                //         // }
+                //         // }else{
+                //         //     console.log(res.message)
+                //         //     this.errors.push(this.language.LB_ERROR_SERVER)
+                //         // }
+                //     }).finally(res => {
+                //     this.slotProps.sendingData = false;
+                // });
             },
             validEmail: function (email) {
                 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

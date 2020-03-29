@@ -17,25 +17,39 @@ try {
     debug('Fail to get options', error.message);
 }
 
-const submitToEndpoint = function connectToEndpoint(email, fields) {
+const submitToEndpoint = function connectToEndpoint(email, fields, callback) {
     const emailEncoded = encodeURIComponent(email);
     let url = endpoint;//.replace(/\/post/g, '/post-json');
     const listFields = fields ? '&' + queryString.stringify(fields) : '';
     const queryParams = `&to=${emailEncoded}${listFields}`;
     url = `${url}${queryParams}`;
 
-    return new Promise((resolve, reject) =>
-        jsonp(url, { param: 'c', timeout: 3500 }, (err, data) => {
-            if (err) {
-                debug('Request failed', err);
-                reject(err);
-            }
-            if (data) {
-                debug('Request success', data);
-                resolve(data);
-            }
-        })
-    );
+    // return new Promise((resolve, reject) =>
+    //     jsonp(url, { param: 'c', timeout: 3500 }, (err, data) => {
+    //         if (err) {
+    //             debug('Request failed', err);
+    //             reject(err);
+    //         }
+    //         if (data) {
+    //             debug('Request success', data);
+    //             resolve(data);
+    //         }
+    //     })
+    // );
+
+    jsonp(url, { param: 'c', timeout: 3500 }, (err, data) => {
+        if (err) {
+            debug('Request failed', err);
+            // reject(err);
+        }
+        if (data) {
+            debug('Request success', data);
+            // resolve(data);
+        }
+
+        callback(data, err);
+    })
+
 };
 
 export default submitToEndpoint;
