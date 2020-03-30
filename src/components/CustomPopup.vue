@@ -212,6 +212,10 @@
             list-style none
             color red
 
+        &__success-box
+            list-style none
+            color green
+
         &__wrap
             margin 1.5rem auto
             padding 1.8rem 2.3rem
